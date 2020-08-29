@@ -2,9 +2,7 @@
 
 module Db where
 
-import Control.Monad.IO.Class
 import Database.PostgreSQL.Simple
-import Data.Pool(Pool, createPool, withResource)
 import GHC.Generics (Generic)
 
 data DbConfig = DbConfig {
