@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-
+module Main where 
 import CharacterService
 import Data.Pool (createPool)
 import Database.PostgreSQL.Simple (close)
@@ -7,6 +7,7 @@ import Db
 import Views
 import Web.Scotty
 import Control.Monad.IO.Class (MonadIO(liftIO))
+
 
 main :: IO ()
 main = do

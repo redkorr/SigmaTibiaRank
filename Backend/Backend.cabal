@@ -16,3 +16,10 @@ executable          Backend
                   , postgresql-simple
                   , resource-pool
                   , http-conduit
+
+Test-Suite      Test
+    type:       exitcode-stdio-1.0
+    main-is:    Spec.hs
+    build-depends: base
+            --  , Backend
+                 , hspec
