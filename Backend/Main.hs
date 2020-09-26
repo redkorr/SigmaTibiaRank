@@ -1,11 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where 
-import CharacterService
+import CharacterService ( getCharacter )
 import Data.Pool (createPool)
 import Database.PostgreSQL.Simple (close)
 import Db
-import Views
-import Web.Scotty
+    ( newConn, DbConfig(DbConfig, dbName, dbUser, dbPassword) )
+import Views ( viewVonvir )
+import Web.Scotty ( get, scotty )
 import Control.Monad.IO.Class (MonadIO(liftIO))
 
 
@@ -19,5 +20,5 @@ main = do
       scotty 3000 $ do
         get "/vonvir" $
           do
-            vonvir <- liftIO $ getVonvir ()
+            vonvir <- liftIO $ getCharacter "vonvir" 
             viewVonvir $ vonvir 

@@ -4,6 +4,7 @@ import Data.Aeson
 data Character = Character String Int
     deriving (Show)
 
+
 instance FromJSON Character where
     parseJSON (Object v) = Character <$> 
                                         v .: "name" <*>
