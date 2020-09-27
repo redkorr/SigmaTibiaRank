@@ -2,7 +2,7 @@ module Domain where
 import Data.Aeson
 
 data Character = Character String Int
-    deriving (Show)
+    deriving (Show, Eq)
 
 
 instance FromJSON Character where

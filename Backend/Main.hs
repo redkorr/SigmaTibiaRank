@@ -10,8 +10,8 @@ import Web.Scotty ( get, scotty )
 import Control.Monad.IO.Class (MonadIO(liftIO))
 
 
-main :: IO ()
-main = do
+defaultMain :: IO ()
+defaultMain = do
   let dbConf = Just Db.DbConfig {dbName = "psql", dbUser = "postgres", dbPassword = "postgres"}
   case dbConf of
     Nothing -> putStrLn "no config"

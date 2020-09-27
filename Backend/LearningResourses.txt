@@ -1,2 +1,0 @@
-https://github.com/dbushenko/scotty-blog-postgres - example scotty project
-https://hoogle.haskell.org/ - haskell api search engine

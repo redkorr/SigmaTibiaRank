@@ -3,6 +3,11 @@ version:       0.0.0
 cabal-version: >= 1.8
 build-type:    Simple
 
+executable       BackendExec
+    hs-source-dirs: .
+    main-is:        Setup.hs
+    build-depends:  Backend
+
 library          Backend
     hs-source-dirs: .
     exposed-modules: CharacterService

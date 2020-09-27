@@ -1,7 +1,8 @@
 module CharacterServiceSpec (spec) where
 
 import Test.Hspec
-import CharacterService (replaceSpaceWithPlus)
+import CharacterService (replaceSpaceWithPlus, getConnectionString, getCharacter)
+import Domain
 
 spec :: Spec
 spec = do
@@ -10,8 +11,13 @@ spec = do
       let name = "Von Vir"
       replaceSpaceWithPlus name `shouldBe` "Von+Vir"
 
--- spec2 :: Spec
--- spec2 = do
---   describe "boo" $ do
---     it "testing" $ do
---       2 `shouldBe` 2
+  describe "get connection string" $ do
+    it "should return non empty string" $ do
+      getConnectionString () `shouldSatisfy` (>0) . length
+
+  
+  -- integration tests
+  describe "character service on searching for vonvir" $ do
+    it "should return character named vonvir" $ do
+      let name = "Vonvir"
+      getCharacter name `shouldReturn` (Just $ Character "Vonvir" 130)
