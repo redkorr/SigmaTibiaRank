@@ -13,7 +13,7 @@ getCharacter nickname = do
     return character
 
 createApiLink:: String -> String
-createApiLink nickname = getConnectionString () ++ replaceSpaceWithPlus nickname ++ ".json"
+createApiLink nickname = getConnectionString () ++ (replaceSpaceWithPlus nickname) ++ ".json"
 
 replaceSpaceWithPlus:: String -> String 
 replaceSpaceWithPlus str = 
@@ -22,5 +22,6 @@ replaceSpaceWithPlus str =
     in map repl str
 
 
+--todo get it from config
 getConnectionString:: () -> String
 getConnectionString () = "https://api.tibiadata.com/v2/characters/";

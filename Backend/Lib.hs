@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Main where 
+module Lib where 
 import CharacterService ( getCharacter )
 import Data.Pool (createPool)
 import Database.PostgreSQL.Simple (close)
@@ -10,8 +10,8 @@ import Web.Scotty ( get, scotty )
 import Control.Monad.IO.Class (MonadIO(liftIO))
 
 
-defaultMain :: IO ()
-defaultMain = do
+main :: IO ()
+main = do
   let dbConf = Just Db.DbConfig {dbName = "psql", dbUser = "postgres", dbPassword = "postgres"}
   case dbConf of
     Nothing -> putStrLn "no config"
