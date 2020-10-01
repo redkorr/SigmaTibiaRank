@@ -21,6 +21,9 @@ library          Backend
     extensions:     OverloadedStrings
     build-depends:  base   >= 4      && < 5
                   , scotty
+                  , ghc
+                  , bytestring
+                  , containers 
                   , scalpel
                   , aeson
                   , HTTP
