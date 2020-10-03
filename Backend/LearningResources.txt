@@ -1,2 +1,3 @@
 https://github.com/dbushenko/scotty-blog-postgres - example scotty project
 https://hoogle.haskell.org/ - haskell api search engine
+https://williamyaoh.com/posts/2019-10-19-a-cheatsheet-to-json-handling.html - data aeson cheat sheet

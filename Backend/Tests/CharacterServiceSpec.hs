@@ -20,4 +20,4 @@ spec = do
   describe "character service on searching for vonvir" $ do
     it "should return character named vonvir" $ do
       let name = "Vonvir"
-      getCharacter name `shouldReturn` (Just $ Character "Vonvir" 130)
+      getCharacter name `shouldReturn` (Just $ Character "Vonvir" 114)

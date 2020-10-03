@@ -6,6 +6,8 @@ import Network.HTTP.Simple (parseRequest,  getResponseBody, httpLBS )
 import Data.Aeson (decode, eitherDecode, Object, (.:))
 import Data.Map (Map, (!))
 import Debug.Trace (trace)
+import Data.Either
+import Data.Either.Combinators
 import Data.Aeson.Types 
 import qualified Data.ByteString.Lazy as LB
 
@@ -13,25 +15,19 @@ getCharacter:: String-> IO (Maybe Character)
 getCharacter nickname = do 
     initRequest <- parseRequest $ createApiLink nickname
     response <-  httpLBS $ initRequest
-    let responseBody =  processBody $ getResponseBody response
-    let character= decode $ trace ("haskell jest pojebany" ++ show responseBody) responseBody :: Maybe ( Character) 
-    return $ character 
+    return $ processBody $ getResponseBody response
 
-processBody :: LB.ByteString -> LB.ByteString
-processBody body = trace ( "ja prdle: " ++ show (doShit body)) body
+processBody :: LB.ByteString -> Maybe Character
+processBody body = rightToMaybe $ parseJson body
 
-doShit:: LB.ByteString -> Either String String 
-doShit body = do 
+parseJson:: LB.ByteString -> Either String Character 
+parseJson body = do 
     object <- eitherDecode body
     let parser = (\obj -> do
-            characters <- obj .: "characters"
-            mdata <- characters.: "data"
-            name <- mdata .: "name"
-            return name)
+            allCharacters <- obj .: "characters" :: Parser Object 
+            character <- allCharacters .: "data" :: Parser Character
+            return character)
     parseEither parser object
-    
-            
-
 
 createApiLink:: String -> String
 createApiLink nickname = getConnectionString () ++ (replaceSpaceWithPlus nickname) ++ ".json"
