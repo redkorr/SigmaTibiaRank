@@ -6,7 +6,7 @@ import Database.PostgreSQL.Simple (close)
 import Db
     ( newConn, DbConfig(DbConfig, dbName, dbUser, dbPassword) )
 import Views ( viewVonvir )
-import Web.Scotty ( get, scotty )
+import Web.Scotty ( get, scotty, param )
 import Control.Monad.IO.Class (MonadIO(liftIO))
 
 
@@ -18,7 +18,8 @@ main = do
     Just conf -> do
       pool <- createPool (newConn conf) close 1 40 10
       scotty 3000 $ do
-        get "/vonvir" $
+        get "/:nick" $
           do
-            vonvir <- liftIO $ getCharacter "vonvir" 
+            nick <- param "nick"
+            vonvir <- liftIO $ getCharacter nick 
             viewVonvir $ vonvir 
