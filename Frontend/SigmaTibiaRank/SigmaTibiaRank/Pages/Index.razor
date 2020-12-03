@@ -1,0 +1,48 @@
+﻿@page "/"
+@inject HttpClient Http
+
+<h1 class="title">Sigma Tibia Ranking</h1>
+
+@if (rankings == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nick</th>
+                <th>Lvl</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ranking in rankings)
+            {              
+                    <tr>
+                        <td>@ranking.Nick</td>
+                        <td>@ranking.Lvl</td>
+
+                    </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Ranking[] rankings;
+
+    static HttpClient client = new HttpClient();
+
+       protected override async Task OnInitializedAsync()
+       {
+       rankings = await Http.GetFromJsonAsync<Ranking[]>("http://localhost:3000/");
+       }
+    
+       public class Ranking
+       {
+       public string Nick { get; set; }
+
+       public int Lvl { get; set; }
+       }
+}
